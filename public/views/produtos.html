@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app="meuApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="produtosController">
+
+<header>
+    <h1>Produtos Disponíveis</h1>
+</header>
+
+<!-- Barra de pesquisa -->
+<input type="text" class="search-bar" ng-model="pesquisa" placeholder="Pesquisar por nome do produto">
+
+<div class="product-list">
+    <ul>
+        <li class="product-item" ng-repeat="produto in produtos | filter:pesquisa">
+            <span>
+                <h2>{{ produto.nomeProduto }}</h2>
+                <p><strong>Preço:</strong> {{ produto.preco | currency:"€" }}</p>
+                <p><strong>Categoria:</strong> {{ produto.categoria }}</p>
+                <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+                <p><small>(Stock: {{ produto.stock }})</small></p>
+            </span>
+            <button ng-click="comprarProduto(produto)">Comprar</button>
+        </li>
+    </ul>
+</div>
+
+<script>
+    angular.module('meuApp', [])
+        .controller('produtosController', function($scope) {
+            $scope.produtos = [
+                { nomeProduto: 'Produto A', preco: 100, categoria: 'Categoria 1', descricao: 'Descrição detalhada do Produto A.', stock: 10 },
+                { nomeProduto: 'Produto B', preco: 150, categoria: 'Categoria 2', descricao: 'Descrição detalhada do Produto B.', stock: 5 },
+                { nomeProduto: 'Produto C', preco: 200, categoria: 'Categoria 3', descricao: 'Descrição detalhada do Produto C.', stock: 8 }
+            ];
+
+            $scope.comprarProduto = function(produto) {
+                alert('Você comprou: ' + produto.nomeProduto);
+            };
+        });
+</script>
+
+<style>
+    /* Estilos gerais da página */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin: 20px;
+        padding: 10px;
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .product-list {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .product-item {
+        background-color: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .product-item h2 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .product-item p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 15px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+
+</body>
+</html>

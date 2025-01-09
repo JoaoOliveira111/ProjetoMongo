@@ -1,0 +1,106 @@
+<div class="login-container">
+    <h1>Login</h1>
+    <form ng-submit="login()" class="login-form">
+        <label for="username">Utilizador:</label>
+        <input id="username" type="text" ng-model="user.username" required class="input-field" />
+        <br />
+        <label for="password">Password:</label>
+        <input id="password" type="password" ng-model="user.password" required class="input-field" />
+        <br />
+        <button type="submit" class="submit-button">Entrar</button>
+    </form>
+    <p class="error-message" ng-show="errorMessage">{{ errorMessage }}</p>
+</div>
+
+<style>
+    /* Estilos gerais da página */
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .login-container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 2em;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1em;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .input-field:focus {
+        border-color: #007BFF;
+        box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+    }
+
+    .submit-button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 20px;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    /* Animação de fade in */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>

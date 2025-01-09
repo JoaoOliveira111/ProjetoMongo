@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-PT" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<h1>Painel Administrativo</h1>
+
+<!-- Gerenciar Produtos -->
+<section ng-controller="produtosController">
+    <h2>Lista de Produtos</h2>
+    <ul>
+        <li ng-repeat="produto in produtos">
+            <span>
+                {{ produto.nomeProduto }} - {{ produto.preco | currency }} - {{ produto.categoria }}
+            </span>
+            <div class="button-group">
+                <button ng-click="editarProduto(produto)">Editar</button>
+                <button ng-click="deleteProduto(produto._id)">Apagar</button>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Formulário para Adicionar Produto -->
+    <h2>Adicionar Produto</h2>
+    <form ng-submit="addProduto()">
+        <label>Nome:</label>
+        <input type="text" ng-model="novoProduto.nomeProduto" placeholder="Nome do Produto" required>
+        <br>
+        <label>Preço:</label>
+        <input type="number" ng-model="novoProduto.preco" placeholder="Preço" required>
+        <br>
+        <label>Categoria:</label>
+        <input type="text" ng-model="novoProduto.categoria" placeholder="Categoria" required>
+        <br>
+        <label>Stock:</label>
+        <input type="number" ng-model="novoProduto.stock" placeholder="Quantidade em Stock" required>
+        <br>
+        <label>Descrição:</label>
+        <textarea ng-model="novoProduto.descricao" placeholder="Descrição"></textarea>
+        <br>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Formulário de Edição -->
+    <div ng-show="editingProduto">
+        <h2>Editar Produto</h2>
+        <form ng-submit="salvarProduto()">
+            <label>Nome:</label>
+            <input type="text" ng-model="editingProduto.nomeProduto" required>
+            <br>
+            <label>Preço:</label>
+            <input type="number" ng-model="editingProduto.preco" required>
+            <br>
+            <label>Categoria:</label>
+            <input type="text" ng-model="editingProduto.categoria" required>
+            <br>
+            <button type="submit">Guardar alterações</button>
+            <button type="button" ng-click="editingProduto = null">Cancelar</button>
+        </form>
+    </div>
+</section>
+
+<!-- Gerenciar Clientes -->
+<section ng-controller="clientesController">
+    <h2>Clientes</h2>
+    <!-- Formulário para adicionar clientes -->
+    <form ng-submit="adicionarCliente()">
+        <input type="text" ng-model="novoCliente.nome" placeholder="Nome" required>
+        <input type="email" ng-model="novoCliente.email" placeholder="Email" required>
+        <input type="text" ng-model="novoCliente.telefone" placeholder="Telefone" required>
+        <h3>Endereço</h3>
+        <input type="text" ng-model="novoCliente.endereco.rua" placeholder="Rua" required>
+        <input type="text" ng-model="novoCliente.endereco.numero" placeholder="Número" required>
+        <input type="text" ng-model="novoCliente.endereco.cidade" placeholder="Cidade" required>
+        <button type="submit">Adicionar Cliente</button>
+    </form>
+
+    <!-- Lista de clientes -->
+    <h2>Lista de Clientes</h2>
+    <ul>
+        <li ng-repeat="cliente in clientes">
+            <span>
+                {{ cliente.nome }} - {{ cliente.email }} - {{ cliente.endereco.rua }}, {{ cliente.endereco.numero }} - {{ cliente.endereco.cidade }}
+            </span>
+            <div class="button-group">
+                <button ng-click="editarCliente(cliente)">Editar</button>
+                <button ng-click="removerCliente(cliente._id)">Apagar</button>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Formulário de edição de clientes -->
+    <div ng-show="editingCliente">
+        <h2>Editar Cliente</h2>
+        <form ng-submit="salvarCliente()">
+            <label>Nome:</label>
+            <input type="text" ng-model="editingCliente.nome" required>
+            <br>
+            <label>Email:</label>
+            <input type="email" ng-model="editingCliente.email" required>
+            <br>
+            <label>Telefone:</label>
+            <input type="text" ng-model="editingCliente.telefone" required>
+            <br>
+            <h3>Endereço</h3>
+            <label>Rua:</label>
+            <input type="text" ng-model="editingCliente.endereco.rua" required>
+            <br>
+            <label>Número:</label>
+            <input type="text" ng-model="editingCliente.endereco.numero" required>
+            <br>
+            <label>Cidade:</label>
+            <input type="text" ng-model="editingCliente.endereco.cidade" required>
+            <br>
+            <button type="submit">Guardar Alterações</button>
+            <button type="button" ng-click="cancelarEdicao()">Cancelar</button>
+        </form>
+    </div>
+</section>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        margin: 5px 0;
+    }
+
+    input, textarea {
+        width: 300px;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+    .button-group button:nth-child(2) {
+        background-color: #dc3545;
+    }
+
+    .button-group button:nth-child(2):hover {
+        background-color: #c82333;
+    }
+</style>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Informatica</title>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- Visualizações serão carregadas aqui -->
+<div ng-view></div>
+
+<!-- Scripts do Aplicativo -->
+<script src="/app.js"></script>
+<script src="/services/authService.js"></script>
+<script src="/controllers/authController.js"></script>
+<script src="/controllers/adminController.js"></script>
+<script src="/controllers/clientesController.js"></script>
+<script src="/controllers/produtosController.js"></script>
+</body>
+</html>

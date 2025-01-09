@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Realizar Compra</title>
+</head>
+<body ng-app="app" ng-controller="clienteController">
+
+<h1>Realizar Compra</h1>
+<ul>
+    <li ng-repeat="produto in produtos">
+        {{ produto.nomeProduto }} - {{ produto.preco | currency:"€" }}
+        <button ng-click="adicionarAoCarrinho(produto)">Adicionar ao Carrinho</button>
+    </li>
+</ul>
+
+<h2>Carrinho</h2>
+<ul>
+    <li ng-repeat="item in carrinho">
+        {{ item.nomeProduto }} - {{ item.quantidade }}x - {{ item.preco | currency:"€" }}
+        <button ng-click="removerDoCarrinho(item)">Remover</button>
+    </li>
+</ul>
+<p>Total: {{ calcularTotal() | currency:"€" }}</p>
+<button ng-click="finalizarCompra()">Finalizar Compra</button>
+
+</body>
+</html>
